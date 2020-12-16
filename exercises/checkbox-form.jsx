@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 
+const CheckBox = ({ name, checked = false, onChange }) => {
+  return (
+    <input
+      type='checkbox'
+      name={name}
+      checked={checked}
+      onChange={onChange}
+    ></input>
+  )
+}
+
 const CheckboxForm = () => {
   const [checkedItems, setCheckedItems] = useState({})
   const [items, submitItems] = useState({})
 
   const submitForm = event => {
-    console.log('CR', checkedItems)
     let itemsToSubmit = {}
     itemsToSubmit = Object.fromEntries(
       Object.entries(checkedItems).filter(([key, value]) => value === true)
@@ -21,6 +31,7 @@ const CheckboxForm = () => {
       window.open('http://www.google.com', '_blank')
     }
 
+    console.log('IS', itemsToSubmit)
     event.preventDefault()
   }
 
@@ -61,10 +72,9 @@ const CheckboxForm = () => {
         {checkboxes.map(item => (
           <div key={item.key}>
             {item.name}
-            <input
-              type='checkbox'
+            <CheckBox
               name={item.name}
-              checked={checkedItems[item.name] || false}
+              checked={checkedItems[item.name]}
               onChange={handleChange}
             />
             <br />
