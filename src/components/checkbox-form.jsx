@@ -31,7 +31,7 @@ const CheckboxForm = () => {
       window.open('http://www.google.com', '_blank')
     }
 
-    console.log('IS', itemsToSubmit)
+    console.log('itemsToSubmit - props', itemsToSubmit)
     event.preventDefault()
   }
 
