@@ -5,7 +5,7 @@ class CheckboxFormClass extends Component {
     super(props)
     this.state = {
       checkedItems: {},
-      items: {},
+      submittedItems: {},
       checkboxes: [
         {
           name: 'checkbox A',
@@ -31,10 +31,10 @@ class CheckboxFormClass extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.submitForm = this.submitForm.bind(this)
+    this.handleForm = this.handleForm.bind(this)
   }
 
-  submitForm (event) {
+  handleForm (event) {
     let itemsToSubmit = {}
     itemsToSubmit = Object.fromEntries(
       Object.entries(this.state.checkedItems).filter(
@@ -45,14 +45,15 @@ class CheckboxFormClass extends Component {
     if (Object.keys(itemsToSubmit).length === 0) {
       alert('Please select at least one item')
     } else {
-      this.setState({ items: itemsToSubmit })
+      this.setState({ submittedItems: itemsToSubmit })
+
+      console.log('itemsToSubmit - class', itemsToSubmit)
     }
 
     if (Object.keys(itemsToSubmit).length === 2) {
       window.open('http://www.google.com', '_blank')
     }
 
-    console.log('itemsToSubmit - class', itemsToSubmit)
     event.preventDefault()
   }
 
@@ -84,12 +85,12 @@ class CheckboxFormClass extends Component {
           ))}
           <input
             type='hidden'
-            id='itemsToSubmit'
-            name='itemsToSubmit'
-            value={this.state.items}
+            id='submittedItems'
+            name='submittedItems'
+            value={this.state.submittedItems}
           ></input>
           <br />
-          <button type='submit' onClick={this.submitForm}>
+          <button type='submit' onClick={this.handleForm}>
             Submit
           </button>
         </form>

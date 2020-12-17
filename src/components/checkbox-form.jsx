@@ -13,7 +13,7 @@ const CheckBox = ({ name, checked = false, onChange }) => {
 
 const CheckboxForm = () => {
   const [checkedItems, setCheckedItems] = useState({})
-  const [items, submitItems] = useState({})
+  const [submittedItems, submitItems] = useState({})
 
   const submitForm = event => {
     let itemsToSubmit = {}
@@ -25,13 +25,14 @@ const CheckboxForm = () => {
       alert('Please select at least one item')
     } else {
       submitItems(itemsToSubmit)
+
+      console.log('itemsToSubmit - props', itemsToSubmit)
     }
 
     if (Object.keys(itemsToSubmit).length === 2) {
       window.open('http://www.google.com', '_blank')
     }
 
-    console.log('itemsToSubmit - props', itemsToSubmit)
     event.preventDefault()
   }
 
@@ -82,9 +83,9 @@ const CheckboxForm = () => {
         ))}
         <input
           type='hidden'
-          id='itemsToSubmit'
-          name='itemsToSubmit'
-          value={items}
+          id='submittedItems'
+          name='submittedItems'
+          value={submittedItems}
         ></input>
         <br />
         <button type='submit' onClick={submitForm}>
